@@ -131,4 +131,45 @@
   window.addEventListener('pageshow', event => {
     if (event.persisted) finishLoader();
   });
+
+  // 3D hero typography: restrained pointer tilt on desktop only.
+  const heroHeading = $('.hero-heading');
+  const finePointer = window.matchMedia('(pointer:fine)').matches;
+  if (heroHeading && finePointer && !reduceMotion) {
+    const hero = $('.hero');
+    hero?.addEventListener('pointermove', event => {
+      const rect = hero.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - .5;
+      const y = (event.clientY - rect.top) / rect.height - .5;
+      heroHeading.style.transform = `rotateY(${x * -3.2}deg) rotateX(${y * 2.2}deg) translateZ(12px)`;
+    }, { passive: true });
+    hero?.addEventListener('pointerleave', () => { heroHeading.style.transform = 'rotateY(0) rotateX(0) translateZ(0)'; });
+  }
+
+  // Perspective project cards: subtle tilt, never a full-screen gimmick.
+  if (finePointer && !reduceMotion) {
+    $$('.project-card').forEach(card => {
+      const visual = $('.project-visual', card);
+      if (!visual) return;
+      card.addEventListener('pointermove', event => {
+        const rect = visual.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - .5;
+        const y = (event.clientY - rect.top) / rect.height - .5;
+        visual.style.transform = `perspective(1000px) rotateY(${x * 3.5}deg) rotateX(${y * -3.5}deg) translateZ(5px)`;
+      }, { passive: true });
+      card.addEventListener('pointerleave', () => { visual.style.transform = ''; });
+    });
+  }
+
+  // Mark large headings as observed once they enter the viewport.
+  const depthHeadings = $$('.display-title, .contact-title, .intermission-title');
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    const depthObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('depth-ready'); depthObserver.unobserve(entry.target); }
+      });
+    }, { threshold: .2 });
+    depthHeadings.forEach(item => depthObserver.observe(item));
+  } else { depthHeadings.forEach(item => item.classList.add('depth-ready')); }
+
 })();
