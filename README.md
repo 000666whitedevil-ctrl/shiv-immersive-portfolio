@@ -1,28 +1,40 @@
-# Shiv Mishra — Immersive Portfolio (Starter v1)
+# Shiv Mishra — Immersive Portfolio
 
-A responsive, static personal portfolio with a cinematic intro, animated typography, scroll reveals, marquee, custom cursor on desktop, interactive project art, and a mobile navigation menu.
+A responsive, editorial-cinematic personal portfolio built with plain HTML, CSS and JavaScript. No build step, paid hosting, framework or package installation is required.
 
-## Run it
-Open `index.html` in a browser. No build step or paid service is required.
+## Visual direction
 
-## Before publishing
-1. Search `YOUR_EMAIL@example.com` in `index.html` and replace it with your public contact email.
-2. Check every bio/project statement and edit anything you want to change.
-3. Add your real links (LinkedIn, GitHub, résumé) when ready.
-4. Keep in mind this is a static website; the project cards currently use original CSS artwork rather than external images.
+- Hybrid visual identity: warm ivory, obsidian black and restrained electric orange.
+- Oversized editorial typography, cinematic photography and original CSS artwork.
+- Scroll reveals, subtle parallax, custom desktop cursor, loading sequence and responsive mobile navigation.
+- Reduced-motion preferences are respected.
 
-## Publish for free with GitHub Pages
-1. Create a GitHub account if you do not already have one.
-2. Create a **public** repository. To get a personal URL, name it exactly `YOUR-GITHUB-USERNAME.github.io`.
-3. Upload `index.html`, `style.css`, `script.js`, and `README.md` from this folder to the repository root.
-4. Open repository **Settings → Pages**.
-5. Under **Build and deployment**, choose **Deploy from a branch**.
-6. Select branch `main` and folder `/ (root)`, then click **Save**.
-7. Wait a few minutes and open `https://YOUR-GITHUB-USERNAME.github.io/`.
+## Files
 
-GitHub Pages is free for public repositories on GitHub Free. Your website files will be public, so don't put private information in the repository. The included Google Fonts need an internet connection; the website otherwise uses plain HTML/CSS/JavaScript.
+- `index.html` — page structure and editable portfolio copy.
+- `style.css` — design system, responsive layouts and animations.
+- `script.js` — interactions and motion behaviour.
 
-## Notes
-- This is a first visual build, not the final personal copy.
-- No fabricated metrics, testimonials, or job titles are included.
-- Animations respect `prefers-reduced-motion`.
+## Personalise before sharing widely
+
+1. Replace the temporary portrait image in the hero with a portrait of Shiv.
+2. Replace the temporary classroom image and atmospheric image with personal/project photographs where appropriate.
+3. Add Shiv's real LinkedIn profile URL and public email address in the contact section.
+4. Review the research and community project descriptions for accuracy before treating them as final.
+5. Do not add a personal phone number unless you explicitly want it public. Everything in a public GitHub repository and GitHub Pages site can be viewed by anyone.
+
+## Publish with GitHub Pages
+
+This repository is configured for a project site. In GitHub, open **Settings → Pages** and use **Deploy from a branch**, branch `main`, folder `/ (root)`. After a successful deployment, the project site is:
+
+`https://000666whitedevil-ctrl.github.io/shiv-immersive-portfolio/`
+
+The site is static and can be hosted on GitHub Pages for free on a public repository. Google Fonts and the temporary Unsplash photographs require an internet connection.
+
+## Accessibility and performance
+
+- Native scrolling; no scroll hijacking.
+- Responsive layouts for desktop and mobile.
+- `prefers-reduced-motion` support.
+- Semantic sections, descriptive image alt text and keyboard-operable navigation.
+- Replace temporary remote images with optimised local assets for the final production version.
