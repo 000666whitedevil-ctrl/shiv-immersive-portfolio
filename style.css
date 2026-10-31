@@ -160,3 +160,40 @@ img{display:block;max-width:100%}
  .pointer{display:none}
 }
 @media(max-width:390px){.hero-heading{font-size:20vw}.hero-under{gap:10px}.round-link{gap:6px}.round-link>span{width:36px;height:36px}.hero-topline{font-size:6px}.section-meta{font-size:6px}.contact-title{font-size:15vw}}
+
+/* ── MOTION SYSTEM / DEPTH PASS ───────────────────────────────────── */
+:root{--motion-shadow:rgba(255,87,40,.22);--depth-ease:cubic-bezier(.2,.8,.2,1)}
+.hero-main{perspective:1400px;transform-style:preserve-3d}
+.hero-heading{transform-style:preserve-3d;will-change:transform;transition:transform .35s var(--depth-ease)}
+.hero-line>span{text-shadow:1px 1px 0 #d4d0c7,2px 2px 0 #aaa69d,3px 3px 0 #77736d,4px 4px 0 #55514c,0 18px 45px #0008;transform-origin:50% 100%;backface-visibility:hidden}
+.hero-line:first-child>span{animation:hero3DIn 1.35s .32s var(--ease) both}
+.hero-line-two>span{animation:hero3DIn 1.45s .48s var(--ease) both}
+@keyframes hero3DIn{0%{opacity:0;transform:translate3d(0,115%,90px) rotateX(-72deg) skewY(5deg);filter:blur(12px)}65%{opacity:1;transform:translate3d(0,-5%,0) rotateX(8deg) skewY(-1deg);filter:blur(0)}100%{opacity:1;transform:translate3d(0,0,0) rotateX(0) skewY(0);filter:blur(0)}}
+.display-title,.contact-title,.intermission-title{transform-style:preserve-3d;text-shadow:0 1px 0 #00000008}
+.display-title em,.contact-title em,.intermission-title i{display:inline-block;transition:transform .65s var(--ease),color .5s}
+.display-title:hover em,.contact-title:hover em,.intermission-title:hover i{transform:translate3d(0,-.035em,18px) rotateX(-5deg)}
+.reveal{transform:translate3d(0,48px,-35px) rotateX(-5deg);transform-origin:50% 100%;transition:opacity .9s,transform 1s var(--ease);backface-visibility:hidden}
+.reveal.in-view{transform:translate3d(0,0,0) rotateX(0)}
+.project-card{transform-style:preserve-3d;perspective:1100px}
+.project-visual{transform:translateZ(0);transform-style:preserve-3d;transition:box-shadow .6s var(--ease),transform .65s var(--ease);will-change:transform}
+.project-card:hover .project-visual{box-shadow:0 30px 70px #0005}
+.project-visual:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(125deg,#ffffff24,transparent 34%,transparent 68%,#ff572817);opacity:0;transition:opacity .5s}
+.project-card:hover .project-visual:after{opacity:1}
+.research-orb,.future-sphere{transform-style:preserve-3d;will-change:transform;filter:drop-shadow(0 22px 22px #0005)}
+.research-ring{box-shadow:0 0 35px var(--motion-shadow);animation:ringDrift 12s ease-in-out infinite alternate}
+@keyframes ringDrift{from{transform:rotate(-26deg) scaleY(.28) translateX(-2%)}to{transform:rotate(26deg) scaleY(.34) translateX(2%)}}
+.orbit-one{animation:orbitFloat 13s ease-in-out infinite alternate}.orbit-two{animation:orbitFloat 17s ease-in-out infinite alternate-reverse}
+@keyframes orbitFloat{from{translate:-1% -1%;rotate:-4deg}to{translate:1% 2%;rotate:5deg}}
+.story-photo-stack,.hero-portrait-wrap{transform-style:preserve-3d}
+.portrait-frame{transition:transform .8s var(--ease),box-shadow .8s var(--ease);transform:rotateY(-7deg) rotateX(2deg) rotateZ(3deg);transform-style:preserve-3d}
+.portrait-frame:hover{transform:rotateY(0) rotateX(0) rotateZ(0) translateZ(18px);box-shadow:0 45px 100px #000b}
+.portrait-stamp{transform:translateZ(35px)}
+.mind-card{transform-style:preserve-3d;transition:background .45s,transform .6s var(--ease),padding .6s var(--ease)}
+.mind-card:hover{background:#ffffff70;transform:translateY(-7px)}
+.mind-icon{display:inline-block;transform:translateZ(22px);transition:transform .55s var(--ease)}
+.mind-card:hover .mind-icon{transform:translate3d(8px,-5px,35px) rotate(-9deg)}
+.intermission-bg{animation:slowOrbit 24s linear infinite}
+@keyframes slowOrbit{to{rotate:360deg}}
+.ticker-track{will-change:transform}
+@media(max-width:800px){.hero-main{perspective:none}.hero-heading{transform:none!important}.hero-line>span{text-shadow:1px 1px 0 #aaa69d,2px 2px 0 #5b5750,0 12px 30px #0008}.project-visual{transform:none!important}.portrait-frame{transform:rotate(2deg)}.reveal{transform:translateY(24px)}.reveal.in-view{transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.hero-line>span,.orbit,.research-ring,.intermission-bg{animation:none!important}.hero-heading,.project-visual,.mind-card,.portrait-frame{transition:none!important;transform:none!important}}
