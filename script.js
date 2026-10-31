@@ -172,4 +172,46 @@
     depthHeadings.forEach(item => depthObserver.observe(item));
   } else { depthHeadings.forEach(item => item.classList.add('depth-ready')); }
 
+
+  // Cinematic scene activation and sticky navigation state.
+  const navBar = $('.site-nav');
+  const sceneSections = $$('.hero, .story, .work, .intermission, .mind, .contact');
+  if ('IntersectionObserver' in window) {
+    const sceneObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('scene-active');
+          $$('.project-card', entry.target).forEach((card, index) => {
+            card.style.transitionDelay = (index * 110) + 'ms';
+            card.classList.add('scene-visible');
+          });
+        }
+      });
+    }, { threshold: .18 });
+    sceneSections.forEach(section => sceneObserver.observe(section));
+  } else {
+    sceneSections.forEach(section => {
+      section.classList.add('scene-active');
+      $$('.project-card', section).forEach(card => card.classList.add('scene-visible'));
+    });
+  }
+  window.addEventListener('scroll', () => {
+    navBar?.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // Soft ambient pointer light; disabled for touch and reduced-motion users.
+  if (finePointer && !reduceMotion) {
+    document.body.classList.add('has-mouse-glow');
+    let glowQueued = false;
+    window.addEventListener('pointermove', event => {
+      if (glowQueued) return;
+      glowQueued = true;
+      requestAnimationFrame(() => {
+        document.documentElement.style.setProperty('--mx', event.clientX + 'px');
+        document.documentElement.style.setProperty('--my', event.clientY + 'px');
+        glowQueued = false;
+      });
+    }, { passive: true });
+  }
+
 })();
